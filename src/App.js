@@ -30,12 +30,7 @@ function App() {
       const reader = new FileReader();
       reader.onload = async () => {
         setTextContent(reader.result)
-        const result = await analyzeQuality(reader.result);
-        if (result) {
-          setClassify(result.label);
-        } // Display the text content
-        // Display the extracted text
-        
+       
       };
       reader.onerror = () => {
         setMesg("Error reading the file. Please try again.");
@@ -47,10 +42,7 @@ function App() {
       try {
         const extractedText = await extractTextFromPDF(file);
         setTextContent(extractedText)
-        const result = await analyzeQuality(extractedText);
-        if (result) {
-          setClassify(result);
-        }// Display the extracted text
+        
       } catch (error) {
         setMesg("Error reading the PDF file. Please try again.");
         console.error(error);
@@ -78,63 +70,7 @@ async function extractTextFromPDF(file) {
 
 
 // api 
-async function analyzeQuality(text) {
-  const apiKey = "wqCXaympF5PiR1DyLN37n2y8Fbf6BFoOoTq4bobW";
-  try {
-    const response = await fetch("https://api.cohere.ai/v1/generate", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "command", // Use the "command" model
-        prompt: `Analyze the quality of the following text and provide feedback. Also, suggest improvements:\n\n${text}`,
-        max_tokens: 500, // Increased to allow for longer feedback
-        temperature: 0.7, // Controls creativity (0 = strict, 1 = creative)
-      }),
-    });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("API Error:", errorData);
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
-    }
-
-    const result = await response.json();
-    console.log("API Response:", result); // Log the response
-
-    if (!result.generations || result.generations.length === 0) {
-      throw new Error("No generations found in the response.");
-    }
-
-    // Format the feedback
-    const feedback = result.generations[0].text;
-    const formattedFeedback = formatFeedback(feedback);
-    return formattedFeedback;
-  } catch (error) {
-    console.error("Error in analyzeQuality:", error);
-    throw error;
-  }
-}
-
-function formatFeedback(feedback) {
-  // Split the feedback into sections
-  const qualityAnalysis = feedback.match(/Feedback: (.*?)(?=Suggestions:|$)/s)?.[1]?.trim();
-  const suggestions = feedback.match(/Suggestions: (.*)/s)?.[1]?.trim();
-
-  // Format the feedback
-  let formattedFeedback = "";
-  if (qualityAnalysis) {
-    formattedFeedback += `**Quality Analysis:**\n${qualityAnalysis}\n\n`;
-  }
-  if (suggestions) {
-    formattedFeedback += `**Suggestions for Improvement:**\n${suggestions}\n\n`;
-  }
-
-  // If no sections are found, return the original feedback
-  return formattedFeedback || feedback;
-}
 
 return (
   <div className="App">
@@ -158,7 +94,7 @@ return (
       </thead>
       <tbody>
         <tr>
-          <pre>{calssify}</pre>
+          <code>{calssify}</code>
           <td></td>
           <td></td>
         </tr>
