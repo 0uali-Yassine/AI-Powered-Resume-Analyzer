@@ -44,7 +44,7 @@ If any section is missing, your app will alert the user!
 
    ```bash
    git clone https://github.com/yourusername/resume-scanner-app.git
-   cd resume-scanner-app
+   cd ai-powered-resume-analyzer
 2. **Install dependencies:**
 
     ```bash
