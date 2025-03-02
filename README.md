@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# Resume Scanner App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This web application is designed to help users analyze and improve their resumes. It scans the content of a resume to check for missing sections, formatting issues, grammar mistakes, and keyword matching for job descriptions.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### 1️⃣ **Bullet Points & Contact Information Check**
+- ✔ **Bullet Points in Work Experience** → Check if job descriptions use • or - bullet points.
+- ✔ **Contact Information Check** → Ensure there’s an email and phone number in the text.
 
-### `npm start`
+### 2️⃣ **Section Detection (Must-Have Sections)**
+Your app can scan the text and check if these key sections exist:
+- ✔ **Personal Information** (Name, Email, Phone Number)
+- ✔ **Work Experience** (Contains words like "Company," "Job Title," "Years," "Responsibilities")
+- ✔ **Education** (Detect words like "Degree," "University," "Graduation Year")
+- ✔ **Skills Section** (Looks for words like "Skills," "Technologies," "Tools")
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+If any section is missing, your app will alert the user!
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 3️⃣ **Job Matching Checks (Keyword Analysis)**
+- ✔ **Compare Resume to a Job Description** → Let users paste a job description and check if important keywords exist in the resume.
+  - Example: If applying for a "Frontend Developer" role, check if words like "React," "JavaScript," "CSS" appear in the resume.
+- ✔ **Highlight missing keywords** and suggest adding them.
 
-### `npm test`
+### 4️⃣ **Formatting & Readability Checks**
+- ✔ **Check for Too Many Paragraphs** → Warn if work experience is written in large paragraphs instead of bullet points.
+- ✔ **Check for Excessive Capital Letters** → Avoid all-caps resumes.
+- ✔ **Spacing Issues** → Detect if there are too many or too few spaces between sections.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 5️⃣ **Grammar & Spelling Check (Using a Free API)**
+- ✔ **Use a Free API like LanguageTool.org** to check spelling mistakes.
+- ✔ **Highlight typos and incorrect grammar** in the resume.
 
-### `npm run build`
+## Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **React** - Frontend framework to build the user interface.
+- **Tailwind CSS** - For fast and responsive design.
+- **LanguageTool API** - For grammar and spelling checks.
+- **PDF.js** - For extracting text from PDF files.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How to Use
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone the repository:**
 
-### `npm run eject`
+   ```bash
+   git clone https://github.com/yourusername/resume-scanner-app.git
+   cd resume-scanner-app
+2. **Install dependencies:**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    ```bash
+    npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Run the app:**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    ```bash
+    npm start
+The app will be available at http://localhost:3000.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## How it Works
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. The user uploads a resume in either a text or PDF format.
+2. The app scans the resume and checks for the must-have sections, keyword matches, formatting, and grammar issues.
+3. It then displays alerts and suggestions for the user to improve their resume.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Future Features (Coming Soon!)
 
-### Code Splitting
+- ✔ **PDF Text Extraction** → Extract and analyze resumes directly from PDF files.
+- ✔ **Job-Specific Keyword Detection** → Better matching of resume to specific job descriptions based on industry-specific terms.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contributing
 
-### Analyzing the Bundle Size
+If you'd like to contribute, feel free to fork the repository, make changes, and submit a pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## License
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
