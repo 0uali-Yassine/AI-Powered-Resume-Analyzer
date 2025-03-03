@@ -2,11 +2,13 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
+  // State variables to hold various pieces of information
   const [message, setMessage] = useState('');
   const [textContent, setTextContent] = useState('');
   const [wordCount, setWordCount] = useState(0);
   const [longSentences, setLongSentences] = useState([]);
 
+  // Function to handle file upload
   const uploadFile = async (e) => {
     setMessage('');
     setTextContent('');
@@ -15,14 +17,16 @@ function App() {
       setMessage("No file selected. Please choose a file");
       return;
     }
-
+    
+    // Check if the file type is supported
     if (!file.type.startsWith('text') && !file.type.startsWith('application')) {
       setMessage('Unsupported file type. Please select a text or PDF file');
       return;
     }
 
     setMessage('Loading...');
-    
+
+    // Read the file based on its type
     if (file.type.startsWith('text')) {
       readTextFile(file);
     } else if (file.type.startsWith('application')) {
@@ -30,6 +34,7 @@ function App() {
     }
   };
 
+  // Function to read text files
   const readTextFile = (file) => {
     const reader = new FileReader();
     reader.onload = () => {
@@ -42,6 +47,7 @@ function App() {
     reader.readAsText(file);
   };
 
+  // Function to read PDF files
   const readPdfFile = async (file) => {
     try {
       const extractedText = await extractTextFromPDF(file);
@@ -55,6 +61,7 @@ function App() {
     }
   };
 
+  // Function to check for long sentences
   const checkSentences = (text) => {
     const longSentences = findLongSentences(text, 30);
     setLongSentences(longSentences);
@@ -65,11 +72,13 @@ function App() {
     }
   };
 
+  // Function to find sentences longer than a specified number of words
   const findLongSentences = (text, maxWords) => {
     const sentences = text.split(/(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?|\!)\s+/);
     return sentences.filter(sentence => sentence.split(/\s+/).length > maxWords);
   };
 
+  // Function to extract text from PDF files
   const extractTextFromPDF = async (file) => {
     const fileURL = URL.createObjectURL(file);
     const pdf = await window.pdfjsLib.getDocument(fileURL).promise;
